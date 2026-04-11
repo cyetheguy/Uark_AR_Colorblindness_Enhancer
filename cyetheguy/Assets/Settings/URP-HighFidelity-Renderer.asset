@@ -65,10 +65,10 @@ MonoBehaviour:
       type: 3}
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
-  - {fileID: 6198221203916591848}
   - {fileID: -1878332245247344467}
   - {fileID: -1568985226567725949}
-  m_RendererFeatureMap: e812be6a58810456adc0de57c6d2eee5834c98d03fd839ea
+  - {fileID: 3867417339340303884}
+  m_RendererFeatureMap: adc0de57c6d2eee5834c98d03fd839ea0cae906594d3ab35
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
---- !u!114 &6198221203916591848
+--- !u!114 &3867417339340303884
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
