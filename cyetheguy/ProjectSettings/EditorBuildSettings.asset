@@ -17,9 +17,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Game_NoInteraction.unity
     guid: 56b13eedb692ec9439e3e9730ada5a34
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Game_w_Magnet.unity
     guid: 937feb5dca4aefb49868e6425a023645
+  - enabled: 1
+    path: Assets/Scenes/Colorblind_Filters.unity
+    guid: d261cdf431b5fea409e774e7a8f80a0e
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: b3901c397e8cd8d49a3e55c5b62eb0f3,
       type: 2}
