@@ -23,7 +23,7 @@ MonoBehaviour:
     m_SerializedTextureGuid:
       m_GuidLow: 14772969682835596201
       m_GuidHigh: 14454866973070555497
-    m_Size: {x: 0.25, y: 0.19003256}
+    m_Size: {x: 1, y: 0.7601302}
     m_SpecifySize: 1
     m_Name: Logo
     m_Texture: {fileID: 2800000, guid: ef07e3a921a7cd0469796545ed009ac8, type: 3}
