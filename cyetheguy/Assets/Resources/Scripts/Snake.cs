@@ -23,41 +23,38 @@ public class Snake : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        // logic for updating direction
-        
-    }
-
     void FixedUpdate()
     {
         Bounds bounds = gridArea.bounds;
-        Vector3 position = transform.position + transform.forward * MoveSpeed;
-        if (position.x > bounds.max.x) position.x = bounds.min.x;
+        transform.Translate(Vector3.forward * MoveSpeed, Space.Self);
+        Vector3 position = transform.localPosition;
+        /*if (position.x > bounds.max.x) position.x = bounds.min.x;
         if (position.x < bounds.min.x) position.x = bounds.max.x;
         if (position.z > bounds.max.z) position.z = bounds.min.z;
-        if (position.z < bounds.min.z) position.z = bounds.max.z;
+        if (position.z < bounds.min.z) position.z = bounds.max.z;*/
+        if (position.x > 10) position.x = -10;
+        if (position.x < -10) position.x = 10;
+        if (position.z > 10) position.z = -10;
+        if (position.z < -10) position.z = 10;
 
         position.y = 1.0f;
 
-        transform.position = position;
+        transform.localPosition = position;
 
-        PrevPos.Insert(0, transform.position);
+        PrevPos.Insert(0, transform.localPosition);
 
         int index = 1;
         foreach (var body in BodySegments)
         {
             Vector3 point = PrevPos[Mathf.Min(index * bodyGap, PrevPos.Count-1)];
-            body.transform.position = point;
+            body.transform.localPosition = point;
             index++;
         }
     }
 
     public void GrowSnake()
     {
-        GameObject bodyPart = Instantiate(BodyPrefab);
+        GameObject bodyPart = Instantiate(BodyPrefab, transform.parent);
         BodySegments.Add(bodyPart);
     }
 

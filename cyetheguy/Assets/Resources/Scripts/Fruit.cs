@@ -45,9 +45,9 @@ public class Fruit : MonoBehaviour
     private void goToRandomPos()
     {
         Bounds bounds = gridArea.bounds;
-        float x = UnityEngine.Random.Range(bounds.min.x, bounds.max.x);
-        float z = UnityEngine.Random.Range(bounds.min.z, bounds.max.z);
-        transform.position = new Vector3(Mathf.Round(x), 0.75f, Mathf.Round(z));
+        float x = UnityEngine.Random.Range(-3, 3);
+        float z = UnityEngine.Random.Range(-3, 3);
+        transform.localPosition = new Vector3(Mathf.Round(x), 1.0f, Mathf.Round(z));
     }
 
     void SetCountText()
