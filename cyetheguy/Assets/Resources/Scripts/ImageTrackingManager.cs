@@ -65,7 +65,7 @@ public class ImageTrackingManager : MonoBehaviour
             bool isTracking = trackedImage.trackingState == TrackingState.Tracking;
             foreach (var gameObject in createdPrefabs)
             {
-                if (gameObject.name == trackedImage.name)
+                if (gameObject.name == markerName)
                 {
                     gameObject.SetActive(isTracking);
                 }
