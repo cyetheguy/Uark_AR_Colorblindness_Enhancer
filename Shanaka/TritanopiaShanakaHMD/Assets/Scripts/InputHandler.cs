@@ -6,33 +6,48 @@ public class InputHandler : MonoBehaviour
     private int curCol = 0;
     private CubeController activeCube;
     private bool gameActive = false;
-    public float hoverHeight = 0.6f;
+    public float hoverHeight = 0.15f; // FIXED: was 0.6f causing flying
 
-    // Thumbstick control
     private float axisThreshold = 0.7f;
     private bool verticalInUse = false;
     private bool horizontalInUse = false;
 
     void Start()
     {
-        Invoke(nameof(SpawnNext), 1.0f);
+        // REMOVED Invoke SpawnNext here
+        // GameManager.Start() controls when first cube spawns
     }
 
     void Update()
     {
+        // RESTART CHECK - when result panel is visible
+        if (UIManager.Instance != null &&
+            UIManager.Instance.resultPanel != null &&
+            UIManager.Instance.resultPanel.activeSelf)
+        {
+            if (OVRInput.GetDown(OVRInput.Button.One) ||
+                OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) ||
+                OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) ||
+                Input.GetKeyDown(KeyCode.Space))
+            {
+                UIManager.Instance.RestartGame();
+            }
+            return;
+        }
+
         if (!gameActive || activeCube == null) return;
 
-        // -------- KEYBOARD (for testing) --------
+        // KEYBOARD (for testing in editor)
         if (Input.GetKeyDown(KeyCode.UpArrow)) Move(1, 0);
         if (Input.GetKeyDown(KeyCode.DownArrow)) Move(-1, 0);
         if (Input.GetKeyDown(KeyCode.LeftArrow)) Move(0, -1);
         if (Input.GetKeyDown(KeyCode.RightArrow)) Move(0, 1);
         if (Input.GetKeyDown(KeyCode.Space)) Place();
 
-        // -------- VR THUMBSTICK --------
+        // VR THUMBSTICK
         HandleThumbstick();
 
-        // -------- TRIGGER TO PLACE --------
+        // TRIGGER TO PLACE
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) ||
             OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
         {
@@ -47,34 +62,26 @@ public class InputHandler : MonoBehaviour
         float horizontal = axis.x;
         float vertical = axis.y;
 
-        // -------- VERTICAL --------
         if (Mathf.Abs(vertical) > axisThreshold)
         {
             if (!verticalInUse)
             {
-                if (vertical > 0)
-                    Move(1, 0);
-                else
-                    Move(-1, 0);
-
+                if (vertical > 0) Move(1, 0);
+                else Move(-1, 0);
                 verticalInUse = true;
             }
         }
         else
         {
-            verticalInUse = false; // reset when released
+            verticalInUse = false;
         }
 
-        // -------- HORIZONTAL --------
         if (Mathf.Abs(horizontal) > axisThreshold)
         {
             if (!horizontalInUse)
             {
-                if (horizontal > 0)
-                    Move(0, 1);
-                else
-                    Move(0, -1);
-
+                if (horizontal > 0) Move(0, 1);
+                else Move(0, -1);
                 horizontalInUse = true;
             }
         }
@@ -116,8 +123,6 @@ public class InputHandler : MonoBehaviour
         slot.occupant = activeCube;
 
         activeCube.transform.SetParent(slot.transform);
-        //activeCube.transform.localPosition = new Vector3(0, 0.1f, 0);
-        //activeCube.transform.localPosition = new Vector3(0, 0.5f, 0);
         activeCube.transform.localPosition = new Vector3(0, 0.1f, 0);
         activeCube.transform.localRotation = Quaternion.identity;
         activeCube.transform.localScale = Vector3.one;
@@ -140,12 +145,11 @@ public class InputHandler : MonoBehaviour
             curRow = 0;
             curCol = 0;
             gameActive = true;
-
             ParentCubeToCell(0, 0);
         }
     }
 
-    // Optional UI buttons
+    // UI buttons
     public void MoveUp() { if (gameActive) Move(1, 0); }
     public void MoveDown() { if (gameActive) Move(-1, 0); }
     public void MoveLeft() { if (gameActive) Move(0, -1); }
