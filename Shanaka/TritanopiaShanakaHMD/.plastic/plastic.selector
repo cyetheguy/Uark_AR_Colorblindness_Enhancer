@@ -1,0 +1,4 @@
+repository "TritanopiaShanakaHMD/TritanopiaShanakaHMD@1374517060721@cloud"
+  path "/"
+    br "/main"
+    co "/main"
