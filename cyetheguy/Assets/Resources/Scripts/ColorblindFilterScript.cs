@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class NewBehaviourScript : MonoBehaviour
+public class ColorblindFilterScript : MonoBehaviour
 {
     [SerializeField] private Material cbMat;
 
@@ -55,6 +55,11 @@ public class NewBehaviourScript : MonoBehaviour
                 cbMat.SetKeyword(deuteranopia, true);
                 break;
         }
+    }
+
+    public void SetDropdown(int index)
+    {
+        if (dropdown != null) OnValueChanged(index);
     }
 
 }
