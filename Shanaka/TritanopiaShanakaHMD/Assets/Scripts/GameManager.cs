@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     public GameObject cubePrefab;
     public Transform cubeHolder;
     public TritanopiaColorblindController colorblindController;
-
     private Queue<CubeColor> colorQueue = new Queue<CubeColor>();
     private bool gameOver = false;
 
@@ -33,8 +32,24 @@ public class GameManager : MonoBehaviour
         foreach (var c in colors)
             colorQueue.Enqueue(c);
 
+        // Enable filter BEFORE spawning any cube
         if (colorblindController != null)
+        {
             colorblindController.EnableTritanopia();
+            Debug.Log("Tritanopia filter enabled at start");
+        }
+        else
+        {
+            Debug.LogError("colorblindController is NULL! Drag FilterController into GameManager!");
+        }
+
+        // Delay spawn so filter activates first
+        Invoke(nameof(StartGame), 0.5f);
+    }
+
+    void StartGame()
+    {
+        FindObjectOfType<InputHandler>().SpawnNext();
     }
 
     public CubeController GetNextCube()
@@ -58,14 +73,13 @@ public class GameManager : MonoBehaviour
             gameOver = true;
             RevealRealColors();
             bool playerWon = !RuleChecker.Instance.HasViolation(grid);
-
             if (playerWon)
-                // Shows the secret code on win
                 UIManager.Instance.ShowWinMessage("R-Y-B-G-Y-R-G-B-Y");
             else
                 UIManager.Instance.ShowResult(false);
             return;
         }
+
         FindObjectOfType<InputHandler>().SpawnNext();
     }
 
