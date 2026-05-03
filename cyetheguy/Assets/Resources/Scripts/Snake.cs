@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System.Security.Cryptography;
 
 public class Snake : MonoBehaviour
 {
@@ -13,12 +15,21 @@ public class Snake : MonoBehaviour
     private Vector3 faceDir =  Vector3.right;
     private List<GameObject> BodySegments = new List<GameObject>();
     private List<Vector3> PrevPos = new List<Vector3>();
-    
+
+    public TextMeshProUGUI countText;
+    public GameObject winTextObject;
+    public GameObject fruit;
+    public GameObject poison;
+
+    private int count = 0;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
+        SetCountText();
+        winTextObject.SetActive(false);
         GrowSnake();
 
     }
@@ -26,7 +37,7 @@ public class Snake : MonoBehaviour
     void FixedUpdate()
     {
         Bounds bounds = gridArea.bounds;
-        transform.Translate(Vector3.forward * MoveSpeed, Space.Self);
+        transform.Translate(Vector3.forward * MoveSpeed , Space.Self);
         Vector3 position = transform.localPosition;
         /*if (position.x > bounds.max.x) position.x = bounds.min.x;
         if (position.x < bounds.min.x) position.x = bounds.max.x;
@@ -42,6 +53,7 @@ public class Snake : MonoBehaviour
         transform.localPosition = position;
 
         PrevPos.Insert(0, transform.localPosition);
+        //if (PrevPos.Count > 500) PrevPos.RemoveAt(PrevPos.Count - 1);
 
         int index = 1;
         foreach (var body in BodySegments)
@@ -50,6 +62,41 @@ public class Snake : MonoBehaviour
             body.transform.localPosition = point;
             index++;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Fruit"))
+        {
+            count = count + 1;
+            SetCountText();
+            GrowSnake();
+
+            if (count >= 5)
+            {
+                countText.text = "";
+                winTextObject.SetActive(true);
+                ImageTrackingManager.deuteranopiaComplete = true;
+                //Destroy(other.gameObject);
+            }
+        }
+
+        if (other.gameObject.CompareTag("Poison"))
+        {
+            count = 0;
+            SetCountText();
+
+            foreach (var body in BodySegments) Destroy(body);
+            BodySegments.Clear();
+
+
+        }
+
+    }
+
+    void SetCountText()
+    {
+        countText.text = "Deuteranopia Snake\nCount: " + count.ToString();
     }
 
     public void GrowSnake()

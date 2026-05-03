@@ -299,9 +299,6 @@ MonoBehaviour:
   - {fileID: 4873236646693986638, guid: 044f1fb6b7ba707498f46d2780173464, type: 3}
   filterScript: {fileID: 1990169395}
   dropdown: {fileID: 1990169393}
-  tritanopiaComplete: 0
-  protanopiaComplete: 0
-  deuteranopiaComplete: 0
 --- !u!114 &103785847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,7 +1021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49dcdd6cd8ea75547bae4b6bd7734465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cbMat: {fileID: 0}
+  cbMat: {fileID: 2100000, guid: 66c85ff301f197548a830b1df2a22254, type: 2}
 --- !u!1 &649840418
 GameObject:
   m_ObjectHideFlags: 0

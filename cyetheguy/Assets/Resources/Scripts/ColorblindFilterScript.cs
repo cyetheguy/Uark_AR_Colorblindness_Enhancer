@@ -56,10 +56,4 @@ public class ColorblindFilterScript : MonoBehaviour
                 break;
         }
     }
-
-    public void SetDropdown(int index)
-    {
-        if (dropdown != null) OnValueChanged(index);
-    }
-
 }

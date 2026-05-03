@@ -119,11 +119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5593604869aaf924a942ce724085495d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 5
-  SteerSpd: 1
+  gridArea: {fileID: 0}
+  MoveSpeed: 4
   BodyPrefab: {fileID: 0}
   bodyGap: 1
-  BodySpd: 1
+  countText: {fileID: 0}
+  winTextObject: {fileID: 0}
 --- !u!54 &1413934654681717762
 Rigidbody:
   m_ObjectHideFlags: 0

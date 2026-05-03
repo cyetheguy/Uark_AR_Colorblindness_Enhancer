@@ -17,16 +17,17 @@ public class ImageTrackingManager : MonoBehaviour
     public ColorblindFilterScript filterScript;
     public GameObject dropdown;
 
-    public bool tritanopiaComplete = false;
-    public bool protanopiaComplete = false;
-    public bool deuteranopiaComplete = false;
+    public static bool tritanopiaComplete = false;
+    public static bool protanopiaComplete = false;
+    public static bool deuteranopiaComplete = false;
+    private bool gameWon = false;
 
     // MonoBehaviour.Awake() is used to initialize variables or states before the application starts.
     void Awake()
     {
         ourTrackedImages = GetComponent<ARTrackedImageManager>();
 
-        if (dropdown != null) dropdown.SetActive(false);
+        //if (dropdown != null) dropdown.SetActive(false);
     }
 
     // MonoBehaviour.OnEnable() is called when the object becomes enabled and active.
@@ -71,25 +72,26 @@ public class ImageTrackingManager : MonoBehaviour
                 }
             }
 
-            if (isTracking)
+            if (isTracking && !gameWon)
             {
                 switch(markerName)
                 {
                     case "Prize":
-                        filterScript.SetDropdown(0);
+                        filterScript.OnValueChanged(0);
                         if (tritanopiaComplete & protanopiaComplete & deuteranopiaComplete) dropdown.SetActive(true);
+                        gameWon = true;
                         break;
                     case "Tritanopia":
                         tritanopiaComplete = true;
-                        filterScript.SetDropdown(1);
+                        filterScript.OnValueChanged(1);
                         break;
                     case "Protanopia":
                         protanopiaComplete = true;
-                        filterScript.SetDropdown(2);
+                        filterScript.OnValueChanged(2);
                         break;
                     case "Deuteranopia":
                         deuteranopiaComplete = true;
-                        filterScript.SetDropdown(3);
+                        filterScript.OnValueChanged(3);
                         break;
                 }
             }

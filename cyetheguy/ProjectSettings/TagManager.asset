@@ -9,6 +9,8 @@ TagManager:
   - SpeedUp
   - Magnet
   - Snake
+  - Fruit
+  - Poison
   layers:
   - Default
   - TransparentFX
