@@ -78,9 +78,11 @@ public class ImageTrackingManager : MonoBehaviour
                 {
                     case "Prize":
                         filterScript.OnValueChanged(0);
-                        if (tritanopiaComplete && protanopiaComplete && deuteranopiaComplete) dropdown.SetActive(true);
-                        dropdown.transform.Translate(0, -1000,0);
-                        gameWon = true;
+                        if (tritanopiaComplete && protanopiaComplete && deuteranopiaComplete)
+                        {
+                            dropdown.transform.Translate(0, -1000, 0);
+                            gameWon = true;
+                        }
                         break;
                     case "Tritanopia":
                         filterScript.OnValueChanged(1);

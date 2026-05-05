@@ -65,13 +65,14 @@ public class Snake : MonoBehaviour
         if (other.gameObject.CompareTag("Fruit"))
         {
             count = count + 1;
-            SetCountText();
-            GrowSnake();
-
+            
             if (count >= 5)
             {
                 ImageTrackingManager.deuteranopiaComplete = true;
             }
+
+            SetCountText();
+            GrowSnake();
         }
 
         if (other.gameObject.CompareTag("Poison"))
