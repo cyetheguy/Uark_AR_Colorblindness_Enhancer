@@ -27,7 +27,7 @@ public class ImageTrackingManager : MonoBehaviour
     {
         ourTrackedImages = GetComponent<ARTrackedImageManager>();
 
-        //if (dropdown != null) dropdown.SetActive(false);
+        dropdown.transform.Translate(0, 1000,0);
     }
 
     // MonoBehaviour.OnEnable() is called when the object becomes enabled and active.
@@ -78,11 +78,11 @@ public class ImageTrackingManager : MonoBehaviour
                 {
                     case "Prize":
                         filterScript.OnValueChanged(0);
-                        if (tritanopiaComplete & protanopiaComplete & deuteranopiaComplete) dropdown.SetActive(true);
+                        if (tritanopiaComplete && protanopiaComplete && deuteranopiaComplete) dropdown.SetActive(true);
+                        dropdown.transform.Translate(0, -1000,0);
                         gameWon = true;
                         break;
                     case "Tritanopia":
-                        tritanopiaComplete = true;
                         filterScript.OnValueChanged(1);
                         break;
                     case "Protanopia":
@@ -90,7 +90,6 @@ public class ImageTrackingManager : MonoBehaviour
                         filterScript.OnValueChanged(2);
                         break;
                     case "Deuteranopia":
-                        deuteranopiaComplete = true;
                         filterScript.OnValueChanged(3);
                         break;
                 }

@@ -17,9 +17,6 @@ public class Snake : MonoBehaviour
     private List<Vector3> PrevPos = new List<Vector3>();
 
     public TextMeshProUGUI countText;
-    public GameObject winTextObject;
-    public GameObject fruit;
-    public GameObject poison;
 
     private int count = 0;
 
@@ -29,7 +26,6 @@ public class Snake : MonoBehaviour
     void Start()
     {
         SetCountText();
-        winTextObject.SetActive(false);
         GrowSnake();
 
     }
@@ -74,10 +70,7 @@ public class Snake : MonoBehaviour
 
             if (count >= 5)
             {
-                countText.text = "";
-                winTextObject.SetActive(true);
                 ImageTrackingManager.deuteranopiaComplete = true;
-                //Destroy(other.gameObject);
             }
         }
 
@@ -96,7 +89,9 @@ public class Snake : MonoBehaviour
 
     void SetCountText()
     {
-        countText.text = "Deuteranopia Snake\nCount: " + count.ToString();
+        string text = "Snake Minigame\nExploits Deuteranopia\nLength (5 to win): " + count.ToString();
+        if (ImageTrackingManager.deuteranopiaComplete) text = text + "\n\nLEVEL COMPLETE";
+        countText.text = text;
     }
 
     public void GrowSnake()
